@@ -1,0 +1,118 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--      <meta charset="UTF-8">-->
+<!--      <meta name="vievport"-->
+<!--            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--      <meta http-equiv="x-ua-compatible"-->
+<!--            content="ie=edge">-->
+<!--    <title>VELOBIKE</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div id="usercard"> &lt;!&ndash;Карта профиля, человека, который к нам обратился&ndash;&gt;-->
+<!--    </div>-->
+<!--    <p>Just text</p> &lt;!&ndash;Просто текст для проверки&ndash;&gt;-->
+<!--    <a class="link" href="https://mihailgok.ru">Link</a> &lt;!&ndash;Просто ссылка для проверки&ndash;&gt;-->
+<!--    <p class="hint">Some little hint</p> &lt;!&ndash;Просто текст-подсказка для проверки&ndash;&gt;-->
+<!--    <button id="btn" class="button">Show/Hide Main Button</button> &lt;!&ndash;Кнопка, чтобы скрыть / показать основную кнопку&ndash;&gt;-->
+<!--    <button id="btnED" class="button">Enable/Disable Main Button</button> &lt;!&ndash;Кнопка, чтобы сделать кнопку активной/неактивной&ndash;&gt;-->
+<!--    <script src="https://telegram.org/js/telegram-web-app.js"></script>-->
+<!--    <script>-->
+<!--        let tg = window.Telegram.WebApp; //получаем объект webapp телеграма-->
+<!---->
+<!--        tg.expand(); //расширяем на все окно-->
+<!---->
+<!--        tg.MainButton.text = "Changed Text"; //изменяем текст кнопки-->
+<!--        tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе-->
+<!--        tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки-->
+<!--        tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки-->
+<!--        tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры-->
+<!---->
+<!--        btn.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки-->
+<!--            if (tg.MainButton.isVisible){ //если кнопка показана-->
+<!--                tg.MainButton.hide() //скрываем кнопку-->
+<!--            }-->
+<!--          else{ //иначе-->
+<!--            tg.MainButton.show() //показываем-->
+<!--          }-->
+<!--        });-->
+<!---->
+<!--        let btnED = document.getElementById("btnED"); //получаем кнопку активировать/деактивировать-->
+<!--        btnED.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки-->
+<!--            if (tg.MainButton.isActive){ //если кнопка показана-->
+<!--                tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет-->
+<!--                tg.MainButton.disable() //скрываем кнопку-->
+<!--            }-->
+<!--            else{ //иначе-->
+<!--                tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет-->
+<!--                tg.MainButton.enable() //показываем-->
+<!--            }-->
+<!--        });-->
+<!--    </script>-->
+<!--</body>-->
+<!---->
+<!--</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #searchInput {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="buttons">
+        <div class="button" onclick="showSearch()">Поиск</div>
+        <div class="button" onclick="scanQR()">Сканировать QR</div>
+    </div>
+    <div id="searchInput">
+        <input type="text" id="searchBox" placeholder="Введите запрос">
+        <div class="button" onclick="submitSearch()">Найти</div>
+    </div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+    function showSearch() {
+        document.getElementById('searchInput').style.display = 'block';
+        document.getElementById('buttons').style.display = 'none';
+    }
+
+    function submitSearch() {
+        const query = document.getElementById('searchBox').value;
+        console.log('Поиск запроса:', query);
+        // Здесь можно добавить логику отправки запроса
+    }
+
+    function scanQR() {
+        if (window.Telegram.WebApp) {
+            Telegram.WebApp.showScanQrPopup().then((result) => {
+                console.log('Результат сканирования QR-кода:', result);
+                // Здесь можно обработать результат сканирования QR-кода
+            }).catch((error) => {
+                console.error('Ошибка при сканировании QR-кода:', error);
+            });
+        }
+    }
+
+    // Инициализация Telegram Web App
+    if (window.Telegram.WebApp) {
+        Telegram.WebApp.ready();
+    }
+</script>
+</body>
+</html>
